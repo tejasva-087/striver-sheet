@@ -163,3 +163,64 @@ for i in range(n):
   for j in range(i + 1):
     print(chr(65 + i), end="")
   print()
+
+
+n = 5
+for i in range(n):
+  print(' ' * (n - i - 1), end='')
+
+  breakpoint = (2 * i + 1) // 2
+  ch = ord('A')
+
+  for j in range(0, 2 * i + 1):
+    print(chr(ch), end= '')
+    
+    if j < breakpoint:
+      ch += 1
+    else:
+      ch -= 1
+
+  print()
+
+# Alpha-Triangle Pattern
+n = 5
+for i in range(n - 1, -1, -1):
+  ch = ord('A') + i
+  for j in range(0, n - i):
+    print(chr(ch), end='')
+    ch += 1
+  print()
+
+
+# Symmetric-Void Pattern
+n = 5
+for i in range(1, 2 * n + 1):
+  if i <= n:
+    for j in range(n):
+      if j <= n - i:
+        print('*', end="")
+      else:
+        print(" ", end="")
+    
+    for j in range(n - 1, -1, -1):
+      if j <= n - i:
+        print('*', end="")
+      else:
+        print(" ", end="")
+
+  else:
+    for j in range(n):
+      if j < i - n:
+        print("*", end="")
+      else:
+        print(" ", end="")
+
+    
+    for j in range(n - 1, -1, -1):
+      if j < i - n:
+        print("*", end="")
+      else:
+        print(" ", end="")
+
+  print()
+
