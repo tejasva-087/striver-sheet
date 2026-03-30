@@ -224,3 +224,49 @@ for i in range(1, 2 * n + 1):
 
   print()
 
+# Symmetric-Butterfly Pattern
+n = 4
+for i in range(1, 2 * n):
+    if i <= n:
+      for j in range(n):
+        if j < i:
+          print('*', end="")
+        else:
+          print(' ', end="")
+      
+      for j in range(n - 1, -1, -1):
+        if j < i:
+          print('*', end="")
+        else:
+          print(' ', end="")
+
+    else:
+      for j in range(n - 1, -1, -1):
+        if j >= i - n:
+          print('*', end="")
+        else:
+          print(' ', end="")
+      
+      for j in range(n):
+        if j >= i - n:
+          print('*', end="")
+        else:
+          print(' ', end="")
+    print()
+
+# Hollow Rectangle Pattern
+n = 6
+for i in range(n):
+  if i == 0 or i == n - 1:
+    for j in range(n):
+      print('*', end="")
+  else:
+    for j in range(n):
+      if j == 0 or j == n - 1:
+        print('*', end="")
+      else:
+        print(' ', end="")
+  print()
+
+
+
