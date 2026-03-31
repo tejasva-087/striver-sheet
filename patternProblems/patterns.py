@@ -269,4 +269,19 @@ for i in range(n):
   print()
 
 
+# The Number Pattern
+n = 3
+for i in range(1, n + 1):
+  for j in range(1, n + 1):
+    print(n - min(i, j) + 1, end="")
+  for j in range(n - 1, 0, -1):
+    print(n - min(i, j) + 1, end="")
+  print()
+
+for i in range(n - 1, 0, -1):
+  for j in range(1, n + 1):
+    print(n - min(i, j) + 1, end="")
+  for j in range(n - 1, 0, -1):
+    print(n - min(i, j) + 1, end="")
+  print()
 
