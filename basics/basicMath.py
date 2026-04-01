@@ -121,19 +121,34 @@ def find_divisor_optimal(n):
 # print(find_divisor_optimal(4))
 
 # ********************************************************
-# Check for prime numbers
+# Check for prime numbers (brute force)
 # ********************************************************
 def check_prime(n):
-  if n == 0 or n == 1:
-    return False
-  
-  if n == 2:
-    return True
-  
-  for i in range(3, n + 1):
-    if n % i == 0 and i != n:
-      return False
-  
-  return True
+  factors = 0
 
+  for i in range(1, n + 1):
+    if n % i == 0:
+      factors += 1
+  
+  return factors == 2
+
+# print(check_prime(7))
+# print(check_prime(29))
+
+# ********************************************************
+# Check for prime numbers (brute force)
+# ********************************************************
+def check_prime_optimal(n):
+  factors = 0
+
+  for i in range(1, math.floor(n ** 0.5) + 1):
+    if n % i == 0:
+      factors += 1
+
+      if n // i != i:
+        factors += 1
+  
+  return factors == 2
+
+print(check_prime(16))
 print(check_prime(27))
