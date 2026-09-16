@@ -1,5 +1,3 @@
-arr = [1, 2, 3, 4, 5, 6, 7]
-
 def highest_element(arr):
   highest = arr[0]
   for i in arr:
@@ -68,27 +66,151 @@ def rotate_left(arr):
 
 # print(rotate_left(arr))
 
-def rotate_arr(arr, num = 1, direction = 'left'):
-  rotated_arr = []
+def rotate_arr_right(arr, steps):
+  steps = steps % len(arr)
+  temp_arr = arr[0: len(arr) - steps]
 
-  if direction == 'left':
-    elements = arr[0: num]
+  for i in range(steps):
+    arr[i] = arr[len(arr) - steps + i]
 
-    for i in range(num, len(arr)):
-      rotated_arr.append(arr[i])
+  for i in range(steps, len(arr)):
+    arr[i] = temp_arr[i - steps]
 
-    for i in elements:
-      rotated_arr.append(i)
+  return arr
+
+def rotate_arr_left(arr, steps):
+  steps = steps % len(arr)
+
+  temp_arr = arr[0: steps]
+  for i in range(steps, len(arr)):
+    arr[i - steps] = arr[i]
+
+  for i in range(steps):
+    arr[len(arr) - steps + i] = temp_arr[i]
+
+  return arr
+
+
+# print(rotate_arr_left(arr.copy(), 4))
+
+def rotate_arr_left_better(arr, steps):
+  steps = steps % len(arr)
+  arr_length = len(arr)
+
+  for i in range(arr_length // 2):
+    arr[i], arr[arr_length - i - 1] = arr[arr_length - i - 1], arr[i]
+
+  for i in range((arr_length - steps) // 2):
+    arr[i], arr[arr_length - steps - i - 1] = arr[arr_length - steps - i - 1], arr[i]
+
+  for i in range(steps // 2):
+    left = (arr_length - steps) + i
+    right = arr_length - 1 - i
+    arr[left], arr[right] = arr[right], arr[left]
+
+  return arr
+
+def rotate_arr_right_better(arr, steps):
+  steps = steps % len(arr)
+  arr_length = len(arr)
+
+  for i in range(arr_length // 2):
+    arr[i], arr[arr_length - i - 1] = arr[arr_length - i - 1], arr[i]
+
+  for i in range((steps) // 2):
+    arr[i], arr[steps - i - 1] = arr[steps - i - 1], arr[i]
+
+  for i in range((len(arr) - steps) // 2):
+    left = steps + i
+    right = arr_length - 1 - i
+    arr[left], arr[right] = arr[right], arr[left]
+
+  return arr
+
+# print(rotate_arr_right_better(arr, 2))
+
+
+def move_zeros_to_end(arr):
+  i = 0
+  j = 1
+
+  while j < len(arr):
+    if arr[i] == 0 and arr[j] != 0:
+      arr[i], arr[j] = arr[j], arr[i]
+      i += 1
+      j += 1
+    elif arr[i] == 0 and arr[j] == 0:
+      j += 1
+    else:
+      j += 1
+      i += 1
+
+  return arr
+
+
+# print(move_zeros_to_end([1, 2, 0, 0, 0, 0, 3, 4, 0, 5]))
+
+def find_index(arr, num):
+  for i in range(len(arr)):
+    if arr[i] == num:
+      return i
+
+  return -1
+
+# print(find_index(arr, 8))
     
-  else:
-    elements = arr[len(arr) - num: len(arr)]
+def union(arr_1, arr_2):
+  union_arr = []
+  ptr_1, ptr_2 = 0, 0
 
-    for i in range(len(elements)-1, -1, -1):
-      rotated_arr.append(elements[i])
+  while ptr_1 < len(arr_1) and ptr_2 < len(arr_2):
+    if arr_1[ptr_1] == arr_2[ptr_2]:
+      if arr_1[ptr_1] not in union_arr:
+        union_arr.append(arr_1[ptr_1])
+      ptr_1 += 1
+      ptr_2 += 1
 
-    for i in range(0, num):
-      rotated_arr.append(arr[i])
+    elif arr_1[ptr_1] < arr_2[ptr_2]:
+      if arr_1[ptr_1] not in union_arr:
+        union_arr.append(arr_1[ptr_1])
+      ptr_1 += 1
 
-  return rotated_arr
+    else:
+      if arr_2[ptr_2] not in union_arr:
+        union_arr.append(arr_2[ptr_2])
+      ptr_2 += 1
 
-print(rotate_arr(arr, 3, 'right'))
+  while ptr_1 < len(arr_1):
+    if arr_1[ptr_1] not in union_arr:
+      union_arr.append(arr_1[ptr_1])
+    ptr_1 += 1
+
+  while ptr_2 < len(arr_2):
+    if arr_2[ptr_2] not in union_arr:
+      union_arr.append(arr_2[ptr_2])
+    ptr_2 += 1
+
+  return union_arr
+
+# print(union([1, 2, 2, 2, 2, 3, 4], [0, 0, 0, 0, 1, 2, 3, 8, 9]))
+
+def find_missing_val_from_factorial(arr):
+  total_nums = len(arr) + 1
+  total_sum = (total_nums * (total_nums + 1)) / 2 
+
+  arr_sum = 0
+  for i in range(len(arr)):
+    arr_sum += arr[i]
+
+  return total_sum - arr_sum
+
+# print(find_missing_val_from_factorial([1, 2, 4, 5, 6, 7, 8]))
+
+def count_max_consecutive_ones(arr):
+  max_count = 0
+  count = 0
+  pointer = -1
+  for i in range(len(arr)):
+    if arr[i] == 1 and i :
+      pointer += 1
+      count += 1
