@@ -1,0 +1,71 @@
+##############################
+Moore's algorithm
+##############################
+
+Imagine you have a big pile of 7 colored blocks:
+
+* 3 Red blocks
+* 4 Blue blocks
+
+Since there are more Blue blocks than all the other colors combined, Blue is the winner.
+
+---
+
+### The Game: Pairing Up!
+
+To find the winner, we play a game called Elimination:
+
+1. Every time two blocks of different colors meet, they both leave the game.
+2. Every time two blocks of the same color meet, they stay together.
+
+Let's play:
+
+* Take a Red block and a Blue block ----> They match up and both leave.
+* Take another Red block and a Blue block ----> They match up and both leave.
+* Take another Red block and a Blue block ----> They match up and both leave.
+
+---
+
+### Who is left standing?
+
+Every single Red block took a Blue block away with it... but there is 1 Blue block left all by itself!
+
+Because the Blue team had more blocks than all other teams put together, it is impossible for the other colors to eliminate every Blue block. The color that is left at the end is always the majority winner!
+
+Let's trace another example using numbers: `[3, 3, 4, 2, 4, 4, 2, 4, 4]`
+
+Here, the total size is 9, so the majority element must appear more than 4 times.
+
+---
+
+### Step-by-Step Pairing Walkthrough
+
+Think of it as taking items from the array one by one and maintaining a leader and their team strength:
+
+1. See 3: No leader exists. Set Leader = 3, Strength = 1.
+2. See 3: Same team! Leader = 3, Strength = 2.
+3. See 4: Different team! A `4` cancels out a `3`. Leader = 3, Strength = 1.
+4. See 2: Different team! A `2` cancels out the last `3`. Strength = 0 *(Leader is knocked out!)*.
+5. See 4: Field is empty. Set Leader = 4, Strength = 1.
+6. See 4: Same team! Leader = 4, Strength = 2.
+7. See 2: Different team! A `2` cancels out a `4`. Leader = 4, Strength = 1.
+8. See 4: Same team! Leader = 4, Strength = 2.
+9. See 4: Same team! Leader = 4, Strength = 3.
+
+Final Leader Left: 4
+
+---
+
+### What Just Happened?
+
+All non-4 numbers (`3, 3, 2, 2`) tried their best to eliminate the `4`s:
+
+```text
+[3, 4] -> Cancelled
+[3, 2] -> Cancelled
+[2, 4] -> Cancelled
+Remaining: [4, 4, 4] -> Team 4 wins!
+
+```
+
+Since 4 appeared 5 times out of 9, all other numbers combined (only 4 total) didn't have enough power to eliminate every single 4.
