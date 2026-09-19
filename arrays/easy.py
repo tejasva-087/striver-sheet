@@ -209,8 +209,72 @@ def find_missing_val_from_factorial(arr):
 def count_max_consecutive_ones(arr):
   max_count = 0
   count = 0
-  pointer = -1
-  for i in range(len(arr)):
-    if arr[i] == 1 and i :
-      pointer += 1
+
+  i = 0
+  for j in range(len(arr)):
+    if arr[i] == arr[j] == 1:
       count += 1
+    else:
+      max_count = max(max_count, count)
+      i = j + 1
+      count = 0
+
+  return max(max_count, count)
+
+# print(count_max_consecutive_ones([1, 1, 1, 2, 2, 3, 1, 1, 1, 4, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1]))
+
+def find_the_lonely_no(arr):
+  max_val = arr[0]
+  for i in arr:
+    if i > max_val:
+      max_val = i
+
+  hash_arr = [0] * max_val
+  for i in arr:
+    hash_arr[i - 1] += 1
+
+  for i in range(len(hash_arr)):
+    if hash_arr[i] == 1:
+      return i + 1
+
+# print(find_the_lonely_no([1, 2, 3, 3, 1, 4, 2, 4, 7]))
+
+
+def longest_sub_array_length_brute(arr, k):
+  max_len = 0
+  for i in range(len(arr)):
+    sum = 0
+    for j in range(i, len(arr)):
+      sum += arr[j]
+
+      if sum == k:
+        max_len = max(max_len, j - i + 1)
+
+  return max_len
+
+def longest_sub_array_length_better(arr, k):
+  max_len = 0
+  pre_sum_map = {}
+  arr_sum = 0
+
+  for i in range(len(arr)):
+    arr_sum += arr[i]
+
+    if arr_sum == k:
+      max_len = i + 1
+
+    rem = arr_sum - k
+    if rem in pre_sum_map:
+      length = i - pre_sum_map[rem]
+      max_len = max(max_len, length)
+
+    if arr_sum not in pre_sum_map:
+      pre_sum_map[arr_sum] = i
+
+  return max_len
+
+
+
+
+
+print(longest_sub_array_length_better([1, -1, 5, -2, 3], 3))
