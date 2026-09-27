@@ -110,4 +110,39 @@ def buy_sell_stock(arr):
 
   return [buy_day + 1, sell_day + 1, profit]
 
-print(buy_sell_stock([5, 3, 6, 1]))
+# print(buy_sell_stock([5, 3, 6, 1]))
+
+def rearrange_array_by_sign_brute(arr):
+  rearranged_arr = []
+
+  for i in range(len(arr)):
+    for j in range(len(arr)):
+      if arr[j] > 0:
+        rearranged_arr.append(arr[j])
+        arr.pop(j)
+        break
+
+    for j in range(len(arr)):
+      if arr[j] < 0:
+        rearranged_arr.append(arr[j])
+        arr.pop(j)
+        break
+
+  return rearranged_arr
+
+def rearrange_array_by_sign(arr):
+  rearranged_arr = [0] * len(arr)
+  ptr_even = 0
+  ptr_odd = 1
+
+  for i in range(len(arr)):
+    if arr[i] >= 0:
+      rearranged_arr[ptr_even] = arr[i]
+      ptr_even += 2
+    else:
+      rearranged_arr[ptr_odd] = arr[i]
+      ptr_odd += 2
+
+  return rearranged_arr
+
+print(rearrange_array_by_sign([1, 4, -9, 3, -2, -2, -1, 1]))

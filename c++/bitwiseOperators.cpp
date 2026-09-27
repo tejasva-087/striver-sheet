@@ -37,10 +37,10 @@ int main() {
   // BITWISE xor -> ^
   // ####################
   // if same bits then 0 else 1
-  // 0 ^ 0 -> 1
-  // 0 ^ 1 -> 0
-  // 1 ^ 0 -> 0
-  // 1 ^ 1 -> 1
+  // 0 ^ 0 -> 0
+  // 0 ^ 1 -> 1
+  // 1 ^ 0 -> 1
+  // 1 ^ 1 -> 0
 
   cout << (a ^ b) << endl;
 
@@ -62,7 +62,7 @@ int main() {
   // now 1000 == 8 in decimal no system
   // so we get 8
 
-  cout << (a << 3) << endl;
+  cout << (a << 4) << endl;
 
   // if we are performing this left shift operation like
   // a << b
